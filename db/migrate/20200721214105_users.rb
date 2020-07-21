@@ -4,8 +4,8 @@ class Users < ActiveRecord::Migration
       t.string :username
       t.string :email
       t.string :password_digest
-      t.integer :start_weight
-      t.integer :start_bodyfat
+      t.float :start_weight
+      t.float :start_bodyfat
     end
   end
 end
