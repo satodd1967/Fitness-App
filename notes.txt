@@ -1,0 +1,57 @@
+User Stories
+
+Site opens to index(login) screen
+    User can login
+    User can click a link to sign up
+    User can click a link to view app information
+
+Login
+    login requires a username and password
+        if the username and password cannot be validated then users are given a message saying that thier login
+            credentials are not valid and that they can either try again or sign up.  The login page then reloads
+    Users are taken to the logs page
+    If the user attempting to login does not have valid goals set they will be taken to the goals page upon submission
+Sign Up
+    User clicks sign up from the index page
+    User is taken to a signup page where they can enter
+        Username
+        Email
+        Password
+        Start Weight
+        Start BodyFat
+            All fields have appropriate validation requirements
+            If fields don't meet validatin then a message flashes upon submit and reloads the signup page
+                If the username is already in use it is not valid
+        From a successful signup a user goes to an add goals page
+    Users can click on a link to take them back to the login page in case they went to the signup page by mistake
+
+Goals Page            
+    User adds a weight goal
+    User adds a bodyfat goal
+    User adds a start calorie goal
+        All fields have appropriate validation requirements
+        If fields don't meet the validation then a message flashes upon submit and the goals page reloads
+            with the same user logged in
+    When the user submits thier goals they are taken to the logs page
+
+Logs page
+    Logs page is the main screen for the app
+    The logs page defaults to the current date
+    The logs page allows a user to change the date
+    The logs page will show the user log for the date selected as well as the logs for all of thier friends for that date
+    From the logs page the user can
+        Click on an edit link for thier own logs
+            Users cannot click on edit links for friends logs
+            the edit link takes them to the edit page for that specific log
+        Click on a link to add a log
+            This will take them to a log new page
+        Click on a link to a profile page
+            This will take them to a user show page that will show all of thier logs
+        Click on a link to edit thier goals
+            this takes them to the edit page for goals
+        click on a link to add a friends
+            this takes them to the add friend page
+        click on a link to logout
+
+
+
