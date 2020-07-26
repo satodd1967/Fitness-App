@@ -1,0 +1,29 @@
+<h1>Fitness App</h1>
+<h2><%= @user.username %></h2>
+<h3>Edit the log for <%= @log.date %></h3>
+<br>
+<form action="/logs" method="POST">
+<input id="hidden" type="hidden" name="_method" value="patch">
+  <h4>Worked Out:</h4>
+  <input type="radio" name="worked_out" value="Yes" <%= "checked" if @log.worked_out == 1 %>> Yes
+  <br>
+  <input type="radio" name="worked_out" value="No" <%= "checked" if @log.worked_out == 0 %>> No
+  <br>
+  <br>
+  <h4>Tracked Food:</h4>
+  <input type="radio" name="tracked_food" value="Yes" <%= "checked" if @log.tracked_food == 1 %>> Yes
+  <br>
+  <input type="radio" name="tracked_food" value="No" <%= "checked" if @log.tracked_food == 0 %>> No
+  <br>
+  <br>
+  Weight: <input type="number" name="wieght" value="<%= @log.weight %>" step="0.01" min="0" max="300">
+  <br>
+  Body Fat: <input type="number" name="body_fat" value="<%= @log.body_fat %>" step="0.01" min="0" max="50">
+  <br>
+  Active Calories: <input type="number" name="active_calories" value="<%= @log.active_calories %>">
+  <br>
+  Calories: <input type="number" name="calories" value="<%= @log.calories %>">
+  <br>
+  <br>
+  <input type="submit" value="Update">
+</form>
