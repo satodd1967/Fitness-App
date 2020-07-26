@@ -1,23 +1,21 @@
 <h1>Fitness App</h1>
 <h3>Goals</h3>
+<ul>
+    <li><h4><%= @user.username %></h4></li>
+    <li>Start Weight: <%= @user.start_weight %></li>
+    <li>Start Body Fat: <%= @user.start_bodyfat %></li>
+<ul>
 <% @goals.each do |goal| %>
     <ul>
-        <h4><li><%= @goals.user.username %></li></h4>
-        <li>Log Date: <%= log.date %></li>
-        <li>Worked Out: <%= binary_convert(log.worked_out) %></li>
-        <li>Tracked Food: <%= binary_convert(log.tracked_food) %></li>
-        <li>Weight: <%= log.weight %></li>
-        <li>Body Fat: <%= log.body_fat %></li>
-        <li>Active Calories: <%= log.active_calories %></li>
-        <li>Calories: <%= log.calories %></li>
-        <% if current_user == User.find(log.user.id) %>
-            <li><a href="/logs/edit"><button>Edit Log</button></a></li>
-        <% end %>
+        <li>Weight Goal: <%= @goals.weight_goal %></li>
+        <li>Body Fat Goal: <%= @goals.body_fat_goal %></li>
+        <li>Start Calorie Goal: <%= @goals.start_calorie_goal %></li>
         <br>
     </ul>
     <% end %>
 <br>
-<h4><a href="/gaols/edit"><button>Update</button></a></h4>
+<h4><a href="/gaols/edit"><button>Edit Goals</button></a></h4>
+<br>
 <h4><a href="/logout"><button>Log Out</button></a></h4>
 
 
