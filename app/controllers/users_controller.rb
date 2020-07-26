@@ -21,6 +21,10 @@ class UsersController < ApplicationController
     end
 
     get '/signup' do
+        if logged_in?
+            flash[:notice] = "You are currently already logged in.  Please logout to create a new user account"
+            redirect '/'
+        end
         erb :"/users/create_user" 
     end
 

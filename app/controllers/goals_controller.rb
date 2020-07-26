@@ -1,11 +1,11 @@
 class GoalsController < ApplicationController
 
-    get '/goals/' do
+    get '/goals' do
         if !logged_in?
             redirect '/'
         end
         @user = current_user
-        @goals = @user.goals
+        @goals = @user.goal
         erb :'goals/goals'
     end
 

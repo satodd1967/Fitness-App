@@ -1,21 +1,20 @@
 <h1>Fitness App</h1>
-<h3>Goals</h3>
+<h2>Goals for <%= @user.username %></h2>
+<h4>Starting Information</h4>
 <ul>
-    <li><h4><%= @user.username %></h4></li>
     <li>Start Weight: <%= @user.start_weight %></li>
-    <li>Start Body Fat: <%= @user.start_bodyfat %></li>
+    <li>Start Body Fat: <%= @user.start_bodyfat.round(2)*100 %>%</li>
 <ul>
-<% @goals.each do |goal| %>
-    <ul>
-        <li>Weight Goal: <%= @goals.weight_goal %></li>
-        <li>Body Fat Goal: <%= @goals.body_fat_goal %></li>
-        <li>Start Calorie Goal: <%= @goals.start_calorie_goal %></li>
-        <br>
-    </ul>
-    <% end %>
+<br>
+<h4>Current Goals</h4>
+<ul>
+    <li>Weight Goal: <%= @goals.weight_goal %></li>
+    <li>Body Fat Goal: <%= @goals.body_fat_goal.round(2)*100 %>%</li>
+    <li>Start Calorie Goal: <%= @goals.start_calorie_goal %></li>
+    <br>
+</ul>
 <br>
 <h4><a href="/gaols/edit"><button>Edit Goals</button></a></h4>
-<br>
 <h4><a href="/logout"><button>Log Out</button></a></h4>
 
 
