@@ -1,0 +1,27 @@
+<h1>Logs</h1>
+<br>
+<h4><a href="/logs/new"><button>New Log Entry</button></a></h4>
+<br>
+<h4><a href="/logout"><button>Log Out</button></a></h4>
+<br>
+<form action="/signup" method="POST">
+  Date: <input type="date" name="date">
+  <input type="submit" value="Change Date">
+</form>
+<br>
+<% @logs.each do |log| %>
+    <ul>
+        <h4><li><%= log.user.username %></li></h4>
+        <li>Log Date: <%= log.date %></li>
+        <li>Worked Out: <%= binary_convert(log.worked_out) %></li>
+        <li>Tracked Food: <%= binary_convert(log.tracked_food) %></li>
+        <li>Weight: <%= log.weight %></li>
+        <li>Body Fat: <%= log.body_fat %></li>
+        <li>Active Calories: <%= log.active_calories %></li>
+        <li>Calories: <%= log.calories %></li>
+        <% if current_user == User.find(log.user.id) %>
+            <li><a href="/logs/edit"><button>Edit Log</button></a></li>
+        <% end %>
+        <br>
+    </ul>
+    <% end %>

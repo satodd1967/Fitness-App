@@ -1,0 +1,21 @@
+<h1>Fitness App</h1>
+<h3>Goals</h3>
+<form action="/goals" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    Weight Goal: <input type="number" name="weight_goal" value="<%= @goals.weight_goal %>">
+    <br>
+    Body Fat Goal: <input type="number" name="body_fat_goal" value="<%= @goals.body_fat_goal*100 %>"> %
+    <br>
+    Start Calorie Goal: <input type="number" name="start_calorie_goal" value="<%= @goals.start_calorie_goal %>">
+    <br>
+    <input type="submit" value="Update">
+</form>
+<br>
+<h4><a href="/gaols/edit"><button>Update</button></a></h4>
+<h4><a href="/logout"><button>Log Out</button></a></h4>
+
+
+
+
+
+

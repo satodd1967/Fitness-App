@@ -1,5 +1,7 @@
+<% if @error != nil %>
+  <%= @error %>
+<% end %>
 <h1>Fitness App</h1>
-
 <h3>Login</h3>
 <form action="/login" method="POST">
   Username: <input type="text" name="username" placeholder="JoeSmith">
@@ -7,6 +9,6 @@
   Password: <input type="password" name="password" placeholder="Password">
   <br>
   <input type="submit" value="Login" id="submit">
-</form
+</form>
 
 <h4>Don't have an account? <a href="/signup">Sign up!</a></h4>
