@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
 
-    get '/goals' do
+    get '/goals/' do
         if !logged_in?
             redirect '/'
         end
@@ -16,8 +16,8 @@ class GoalsController < ApplicationController
         @user = current_user
         params.each do |key, value|
             if value == ""
-                @error = "Please enter all goals"
-                erb :'/goals/new'
+                flash[:notice] = "Please enter all goals"
+                redirect '/goals/new'
             end
         end
         @goals = Goal.create(
@@ -29,7 +29,8 @@ class GoalsController < ApplicationController
         @user.start_weight = params[:start_weight]
         @user.start_bodyfat = "#{params[:start_bodyfat].to_f/100}"
         @user.save
-        erb :'goals/goals'
+        flash[:notice] = "You have successfully created your goals"
+        redirect '/goals'
     end
 
     get '/goals/new' do

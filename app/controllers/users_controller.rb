@@ -6,8 +6,8 @@ class UsersController < ApplicationController
 		  session[:user_id] = user.id
 		  redirect '/logs'
         else
-            @error = "Failed to login.  Please try again."
-		    erb :index
+            flash[:notice] = "Failed to login.  Please try again."
+		    redirect '/'
 		end
     end
 

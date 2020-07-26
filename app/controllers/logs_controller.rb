@@ -26,10 +26,10 @@ class LogsController < ApplicationController
         erb :'/logs/logs'
     end
 
-    get '/logs/edit' do
+    get '/logs/:id/edit' do
     end
 
-    post '/logs/edit' do
+    patch '/logs/' do
     end
 
 end
