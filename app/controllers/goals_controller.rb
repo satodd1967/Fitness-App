@@ -30,6 +30,7 @@ class GoalsController < ApplicationController
         @user.start_bodyfat = "#{params[:start_bodyfat].to_f/100}"
         @user.save
         flash[:notice] = "You have successfully created your goals"
+        flash[:navigation] = "Review and edit your goals, view your diary, or continue on to view all user diaries"
         redirect '/goals'
     end
 

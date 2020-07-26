@@ -1,3 +1,7 @@
+<% if flash[:date_param] %>
+<%binding.pry%>
+    <h4><a href="/logs/<%= @logs.find_by(date: flash[:date_param]).id.to_s %>/edit"><button>Edit <%= flash[:date_param] %> Log</button></a></h4>
+<% end %>
 <h1>Fitness App</h1>
 <h2>Create a New Log</h2>
 <br>
