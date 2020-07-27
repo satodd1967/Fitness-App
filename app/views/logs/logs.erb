@@ -20,7 +20,7 @@
         <li>Active Calories: <%= log.active_calories %></li>
         <li>Calories: <%= log.calories %></li>
         <% if current_user == User.find(log.user.id) %>
-            <li><a href="/logs/edit"><button>Edit Log</button></a></li>
+            <li><a href="/logs/<%= log.id %>"><button>View/Edit Log</button></a></li>
         <% end %>
         <br>
     </ul>

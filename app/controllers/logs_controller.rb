@@ -45,6 +45,19 @@ class LogsController < ApplicationController
         redirect '/logs'
     end
 
+    get '/logs/:id' do
+        if !logged_in?
+            redirect '/'
+        end
+        @user = current_user
+        if !@user.logs.find_by(id: params[:id])
+            flash[:notice] = "You can only view logs that belong to you"
+            redirect '/logs'
+        end
+        @log = Log.find_by(id: params[:id])
+        erb :'logs/show'
+    end
+
     get '/logs/:id/edit' do
         if !logged_in?
             redirect '/'
@@ -58,7 +71,25 @@ class LogsController < ApplicationController
         erb :'logs/edit'
     end
 
-    patch '/logs/' do
+    patch '/logs/:id' do
+        if !logged_in?
+            redirect '/'
+        else
+            check_completion(params)
+        end
+        @user = current_user
+        @log = Log.find_by(id: params[:id])
+        @log.update(
+            worked_out: string_convert(params[:worked_out]),
+            tracked_food: string_convert(params[:tracked_food]),
+            weight: params[:weight],
+            body_fat: params[:body_fat],
+            active_calories: params[:active_calories],
+            calories: params[:calories],
+            user_id: @user.id
+            )
+        flash[:notice] = "You have succesfully upated this diary entry"
+        redirect "/logs/#{@log.id}"
     end
 
 end

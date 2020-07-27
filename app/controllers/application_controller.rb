@@ -27,6 +27,8 @@ class ApplicationController < Sinatra::Base
       User.find(session[:user_id])
     end
 
+    
+
     def pass_valid(password)
       reg = /^(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){8,40}$/
       return (reg.match(password))? true : false
