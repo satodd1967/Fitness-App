@@ -1,13 +1,15 @@
-<h1>Logs</h1>
+<h1>Diary Entries</h1>
 <br>
 <h4><a href="/logs/new"><button>New Log Entry</button></a></h4>
 <br>
 <h4><a href="/logout"><button>Log Out</button></a></h4>
 <br>
-<form action="/signup" method="POST">
+<form action="/logs" method="get">
   Date: <input type="date" name="date">
   <input type="submit" value="Change Date">
 </form>
+<br>
+<h3>Diary entries for <%= @logs.first.date %></h3>
 <br>
 <% @logs.each do |log| %>
     <ul>

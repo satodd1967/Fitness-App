@@ -5,8 +5,13 @@ class LogsController < ApplicationController
             redirect '/'
         end
         @user = current_user
-        @logs = Log.all
-        erb :'logs/logs'
+        if params == {}    
+            @logs = Log.where(date: Log.last.date)
+            erb :'logs/logs'
+        else
+            @logs = Log.where(date: params[:date])
+            erb :'logs/logs'
+        end
     end
 
     get '/logs/new' do
@@ -90,6 +95,21 @@ class LogsController < ApplicationController
             )
         flash[:notice] = "You have succesfully upated this diary entry"
         redirect "/logs/#{@log.id}"
+    end
+
+    get '/logs/:id/delete' do
+        if !logged_in?
+            redirect '/'
+        end
+        @user = current_user
+        @log = Log.find_by(id: params[:id])
+        if @user.id == @log.user_id
+            @log.delete
+            redirect '/logs'
+        else
+            flash[:notice] = "You can only delete your own diary entries"
+            redirect '/logs'
+        end
     end
 
 end
