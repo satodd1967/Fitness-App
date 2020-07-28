@@ -1,7 +1,7 @@
 <h1>Diary for <%= @user.username %></h1>
 <br>
 <h4><a href="/logs/new"><button>New Log Entry</button></a></h4>
-<br>
+<h4><a href="/logs"><button>Public Diary</button></a></h4>
 <h4><a href="/logout"><button>Log Out</button></a></h4>
 <br>
 <% @logs.each do |log| %>
