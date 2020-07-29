@@ -18,7 +18,7 @@
   <br>
   Weight: <input type="number" name="wieght" value="<%= @log.weight %>" step="0.01" min="0" max="300">
   <br>
-  Body Fat: <input type="number" name="body_fat" value="<%= @log.body_fat %>" step="0.01" min="0" max="50">
+  Body Fat: <input type="number" name="body_fat" value="<%= (@log.body_fat.to_f*100).round(2) %>" step="0.01" min="0" max="50">%
   <br>
   Active Calories: <input type="number" name="active_calories" value="<%= @log.active_calories %>">
   <br>

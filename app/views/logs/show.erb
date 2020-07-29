@@ -6,7 +6,7 @@
     <li>Worked Out: <%= binary_convert(@log.worked_out) %></li>
     <li>Tracked Food: <%= binary_convert(@log.tracked_food) %></li>
     <li>Weight: <%= @log.weight %></li>
-    <li>Body Fat: <%= @log.body_fat %></li>
+    <li>Body Fat: <%= (@log.body_fat.to_f*100).round(2) %>%</li>
     <li>Active Calories: <%= @log.active_calories %></li>
     <li>Calories: <%= @log.calories %></li>
 </ul>

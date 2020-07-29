@@ -5,13 +5,18 @@ class LogsController < ApplicationController
             redirect '/'
         end
         @user = current_user
-        if params == {}    
+        if @logs = Log.where(date: params[:date]) != []
+            @logs = Log.where(date: params[:date])
+            erb :'/logs/logs'
+        elsif params != {}
+            flash[:notice] = "There are no diary entries for #{params[:date]})."
+            params[:date].clear
+            redirect '/logs'
+        else
             @logs = Log.where(date: Log.last.date)
             erb :'logs/logs'
-        else
-            @logs = Log.where(date: params[:date])
-            erb :'logs/logs'
         end
+
     end
 
     get '/logs/new' do
