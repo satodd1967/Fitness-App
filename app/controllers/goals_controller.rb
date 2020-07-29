@@ -2,6 +2,7 @@ class GoalsController < ApplicationController
 
     get '/goals' do
         if !logged_in?
+            flash[:notice] = "You must be logged in to view your goals!"
             redirect '/'
         end
         @user = current_user
