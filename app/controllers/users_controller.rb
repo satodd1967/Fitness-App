@@ -60,6 +60,7 @@ class UsersController < ApplicationController
     get '/users/:slug' do
         @user = User.find_by_slug(params[:slug])
         @logs = @user.logs
+        @goals = @user.goal
         if @logs == []
             flash[:notice] = "You don't currently have any Diary Entries."
             flash[:navigation] = "Create your first entry below."

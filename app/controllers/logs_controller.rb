@@ -57,6 +57,7 @@ class LogsController < ApplicationController
 
     get '/logs/:id' do
         if !logged_in?
+            flash[:notice] = "You must be logged in to view diary entries"
             redirect '/'
         end
         @user = current_user
@@ -70,11 +71,12 @@ class LogsController < ApplicationController
 
     get '/logs/:id/edit' do
         if !logged_in?
+            flash[:notice] = "You must be logged in to edit diray entries"
             redirect '/'
         end
         @user = current_user
         if !@user.logs.find_by(id: params[:id])
-            flash[:notice] = "You can only edit logs that belong to you"
+            flash[:notice] = "You can only edit diary entries that belong to you"
             redirect '/logs'
         end
         @log = Log.find_by(id: params[:id])

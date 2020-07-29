@@ -2,8 +2,24 @@
 <br>
 <h4><a href="/logs/new"><button>New Log Entry</button></a></h4>
 <h4><a href="/logs"><button>Public Diary</button></a></h4>
+<h4><a href="/goals/edit"><button>Edit Goals</button></a></h4>
 <h4><a href="/logout"><button>Log Out</button></a></h4>
 <br>
+<h2>Goals for <%= @user.username %></h2>
+<h4>Starting Information</h4>
+<ul>
+    <li>Start Weight: <%= @user.start_weight %></li>
+    <li>Start Body Fat: <%= @user.start_bodyfat.round(2)*100 %>%</li>
+<ul>
+<br>
+<h4>Current Goals</h4>
+<ul>
+    <li>Weight Goal: <%= @goals.weight_goal %></li>
+    <li>Body Fat Goal: <%= @goals.body_fat_goal.round(2)*100 %>%</li>
+    <li>Start Calorie Goal: <%= @goals.start_calorie_goal %></li>
+    <br>
+</ul>
+
 <% @logs.order(:date).reverse.each do |log| %>
     <ul>
         <li><h4>Log Date: <%= log.date %></h4></li>
