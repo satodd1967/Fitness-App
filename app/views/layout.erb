@@ -23,6 +23,10 @@
           <%= flash[:notice] %>
           <br>
           <%= flash[:navigation] %>
+          <br>
+          <% if flash[:date_param] %>
+              <a href="/logs/<%= @logs.find_by(date: flash[:date_param]).id.to_s %>">View/Edit <%= flash[:date_param] %> Log</a>
+          <% end %>
         </div>
         <%= yield %>
 

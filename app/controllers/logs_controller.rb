@@ -37,7 +37,7 @@ class LogsController < ApplicationController
         @user = current_user
         if @user.logs.find_by(date: params[:date])
             flash[:notice] = "You have already logged for #{params[:date]}."
-            flash[:navigation] = "Change the date and try again or edit or delete the original log."
+            flash[:navigation] = "Change the date and try again or edit/delete the original log."
             flash[:date_param] = "#{params[:date]}"
             redirect '/logs/new'
         else
