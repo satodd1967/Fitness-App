@@ -77,7 +77,8 @@ li {
 .content {
     width: 75%;
     margin-left: 25%;
-    padding: 50px;
+    margin-top: 2%;
+    padding: 10px;
   }
 
 .firstpage {
@@ -92,17 +93,41 @@ li {
     color: #9b9b9b;
 }
 
-input[type="text"], input[type="date"], input[type="password"] {
+input[type="text"], input[type="password"] {
     display: block;
     margin: auto auto;
     width: 100%;
     margin-bottom: 1em;
     padding: .5em 0;
     border: none;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1.5px solid #eaeaea;
     padding-bottom: 1.25em;
     color: #757575;
   }
+
+input[type="date"] {
+    display: block;
+    margin-left: 0%;
+    width: 150px;
+    margin-bottom: 1em;
+    padding: .5em 0;
+    border: none;
+    border-bottom: 1.5px solid #eaeaea;
+    padding-bottom: 1.25em;
+    color: #757575;
+}
+
+input[type="number"] {
+  display: block;
+  margin-left: 0%;
+  width: 150px;
+  margin-bottom: 1em;
+  padding: .5em 0;
+  border: none;
+  border-bottom: 1.5px solid #eaeaea;
+  padding-bottom: .2em;
+  color: #757575;
+}
 
 .changedate {
     width: 20%;
@@ -110,3 +135,15 @@ input[type="text"], input[type="date"], input[type="password"] {
     padding: 0px;
 }
 
+.message {
+  color: red;
+  text-align: center;
+  font-size: 20px;
+}
+
+.log {
+  width: 30%;
+  margin-left: 25%;
+  margin-top: 2%;
+  padding: 10px;
+}

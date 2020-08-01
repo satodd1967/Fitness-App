@@ -9,7 +9,7 @@ class LogsController < ApplicationController
             @logs = Log.where(date: params[:date])
             erb :'/logs/logs'
         elsif params != {}
-            flash[:notice] = "There are no diary entries for #{params[:date]})."
+            flash[:notice] = "There are no diary entries for #{params[:date]}."
             params[:date].clear
             redirect '/logs'
         else
@@ -95,11 +95,12 @@ class LogsController < ApplicationController
             worked_out: string_convert(params[:worked_out]),
             tracked_food: string_convert(params[:tracked_food]),
             weight: params[:weight],
-            body_fat: params[:body_fat],
+            body_fat: "#{params[:body_fat].to_f/100}",
             active_calories: params[:active_calories],
             calories: params[:calories],
             user_id: @user.id
             )
+        @log.save
         flash[:notice] = "You have succesfully upated this diary entry"
         redirect "/logs/#{@log.id}"
     end
@@ -112,9 +113,10 @@ class LogsController < ApplicationController
         @log = Log.find_by(id: params[:id])
         if @user.id == @log.user_id
             @log.delete
+            flash[:notice] = "The log for #{@log.date} has been deleted."
             redirect '/logs'
         else
-            flash[:notice] = "You can only delete your own diary entries"
+            flash[:notice] = "You can only delete your own diary entries."
             redirect '/logs'
         end
     end

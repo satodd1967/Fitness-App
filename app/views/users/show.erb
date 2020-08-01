@@ -1,14 +1,12 @@
 <div class="sidebar">
     <div class="logo-text">
         <h1>Fitness App</h1>
-        <h3>Public Diary Entries</h3>
+        <h3>Diary</h3>
     </div>
-        <div class="nav-link">
-            <h4><a href="/logs/new">New Log Entry</a></h4>
-            <h4><a href="/logs">Public Diary</a></h4>
-            <h4><a href="/goals/edit">Edit Goals</a></h4>
-            <h4><a href="/logout">Log Out</a></h4>
-        </div>
+        <h4><a href="/logs/new">New Log Entry</a></h4>
+        <h4><a href="/logs">Public Diary</a></h4>
+        <h4><a href="/goals/edit">Edit Goals</a></h4>
+        <h4><a href="/logout">Log Out</a></h4>
 </div>     
 <div class="content">
     <h2>Diary for <%= @user.username %></h2>
@@ -17,14 +15,13 @@
         <li>Start Weight: <%= @user.start_weight %></li>
         <li>Start Body Fat: <%= @user.start_bodyfat.round(2)*100 %>%</li>
     </ul>
-    <br>
     <h4>Current Goals</h4>
     <ul>
         <li>Weight Goal: <%= @goals.weight_goal %></li>
         <li>Body Fat Goal: <%= @goals.body_fat_goal.round(2)*100 %>%</li>
         <li>Start Calorie Goal: <%= @goals.start_calorie_goal %></li>
-        <br>
     </ul>
+    <hr style="width: 30%; margin-left: 0%;">
     <h3>Diary Entries</h3>
     <% @logs.order(:date).reverse.each do |log| %>
         <ul>

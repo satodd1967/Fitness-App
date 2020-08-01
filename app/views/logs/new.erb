@@ -1,37 +1,35 @@
 <% if flash[:date_param] %>
     <h4><a href="/logs/<%= @logs.find_by(date: flash[:date_param]).id.to_s %>"><button>View/Edit <%= flash[:date_param] %> Log</button></a></h4>
 <% end %>
-<h1>Fitness App</h1>
-<h2>Create a New Log</h2>
-<br>
-<form action="/logs" method="POST">
-  Date: <input type="date" name="date">
-  <br>
-  <br>
-  <h4>Worked Out:</h4>
-  <input type="radio" name="worked_out" value="Yes"> Yes
-  <br>
-  <input type="radio" name="worked_out" value="No"> No
-  <br>
-  <br>
-  <h4>Tracked Food:</h4>
-  <input type="radio" name="tracked_food" value="Yes"> Yes
-  <br>
-  <input type="radio" name="tracked_food" value="No"> No
-  <br>
-  <br>
-  Weight: <input type="number" name="weight" placeholder="000.00" step="0.01" min="0" max="300">
-  <br>
-  Body Fat: <input type="number" name="body_fat" placeholder="00.00" step="0.01" min="0" max="50">%
-  <br>
-  Active Calories: <input type="number" name="active_calories" placeholder="0000">
-  <br>
-  Calories: <input type="number" name="calories" placeholder="0000">
-  <br>
-  <br>
-  <input type="submit" value="Submit">
-</form>
-<br>
-<h4><a href="/users/<%= @user.slug %>"><button>My Diary</button></a></h4>
-<h4><a href="/logs"><button>Public Diary</button></a></h4>
-<h4><a href="/logout"><button>Log Out</button></a></h4>
+
+<div class="sidebar">
+  <div class="logo-text">  
+    <h1>Fitness App</h1>
+    <h2>Create a New Log</h2>
+    <h4><a href="/users/<%= @user.slug %>">My Diary</a></h4>
+    <h4><a href="/logs">Public Diary</a></h4>
+    <h4><a href="/logout">Log Out</a></h4>
+  </div>
+</div>
+<div class="log">
+  <form action="/logs" method="POST">
+    Date: <input type="date" name="date">
+    <h4>Worked Out:</h4>
+    <input type="radio" name="worked_out" value="Yes"> Yes
+    <br>
+    <input type="radio" name="worked_out" value="No"> No
+    <br>
+    <br>
+    <h4>Tracked Food:</h4>
+    <input type="radio" name="tracked_food" value="Yes"> Yes
+    <br>
+    <input type="radio" name="tracked_food" value="No"> No
+    <br>
+    <br>
+    Weight: <input type="number" name="weight" placeholder="000.00" step="0.01" min="0" max="300">
+    % Body Fat: <input type="number" name="body_fat" placeholder="00.00" step="0.01" min="0" max="50">
+    Active Calories: <input type="number" name="active_calories" placeholder="0000">
+    Calories: <input type="number" name="calories" placeholder="0000">
+    <input type="submit" value="Submit">
+  </form>
+</div>
