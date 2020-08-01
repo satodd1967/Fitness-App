@@ -1,20 +1,14 @@
 class GoalsController < ApplicationController
 
     get '/goals' do
-        if !logged_in?
-            flash[:notice] = "You must be logged in to view your goals!"
-            redirect '/'
-        end
+        user_check
         @user = current_user
         @goals = @user.goal
         erb :'goals/goals'
     end
 
     post '/goals' do
-        if !logged_in?
-            flash[:notice] = "Must be logged in to create goals!"
-            redirect '/'
-        end
+        user_check
         @user = current_user
         params.each do |key, value|
             if value == ""
@@ -37,31 +31,21 @@ class GoalsController < ApplicationController
     end
 
     get '/goals/new' do
-        if !logged_in?
-            flash[:notice] = "Must be logged in to create goals!"
-            redirect '/'
-        end
+        user_check
         @user = current_user
         erb :'goals/new'
     end
 
     get '/goals/edit' do
-        if !logged_in?
-            flash[:notice] = "Must be logged in to edit goals!"
-            redirect '/'
-        end
+        user_check
         @user = current_user
         @goals = @user.goal
         erb :'goals/edit'
     end
     
     patch '/goals' do
-        if !logged_in?
-            flash[:notice] = "You must be logged in to edit goals"
-            redirect '/'
-        else
-            check_completion(params)
-        end
+        user_check
+        check_completion(params)
         @user = current_user
         @goals = @user.goal
         @user.update(

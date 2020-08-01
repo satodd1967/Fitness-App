@@ -1,9 +1,7 @@
 class LogsController < ApplicationController
 
     get '/logs' do
-        if !logged_in?
-            redirect '/'
-        end
+        user_check
         @user = current_user
         if @logs = Log.where(date: params[:date]) != []
             @logs = Log.where(date: params[:date])
@@ -12,6 +10,9 @@ class LogsController < ApplicationController
             flash[:notice] = "There are no diary entries for #{params[:date]}."
             params[:date].clear
             redirect '/logs'
+        elsif flash[:date] != nil
+            @logs = Log.where(date: flash[:date])
+            erb :'logs/logs'
         else
             @logs = Log.where(date: Log.last.date)
             erb :'logs/logs'
@@ -20,20 +21,15 @@ class LogsController < ApplicationController
     end
 
     get '/logs/new' do
-        if !logged_in?
-            redirect '/'
-        end
+        user_check
         @user = current_user
         @logs = @user.logs
         erb :'logs/new'
     end
 
     post '/logs' do
-        if !logged_in?
-            redirect '/'
-        else
-            check_completion(params)
-        end
+        user_check
+        check_completion(params)
         @user = current_user
         if @user.logs.find_by(date: params[:date])
             flash[:notice] = "You have already logged for #{params[:date]}."
@@ -51,15 +47,14 @@ class LogsController < ApplicationController
                 date: params[:date],
                 user_id: @user.id
             )
+            flash[:notice] = "You have successfully added a diary entry."
+            flash[:date] = "#{params[:date]}"
         end
         redirect '/logs'
     end
 
     get '/logs/:id' do
-        if !logged_in?
-            flash[:notice] = "You must be logged in to view diary entries"
-            redirect '/'
-        end
+        user_check
         @user = current_user
         if !@user.logs.find_by(id: params[:id])
             flash[:notice] = "You can only view logs that belong to you"
@@ -70,10 +65,7 @@ class LogsController < ApplicationController
     end
 
     get '/logs/:id/edit' do
-        if !logged_in?
-            flash[:notice] = "You must be logged in to edit diray entries"
-            redirect '/'
-        end
+        user_check
         @user = current_user
         if !@user.logs.find_by(id: params[:id])
             flash[:notice] = "You can only edit diary entries that belong to you"
@@ -84,11 +76,8 @@ class LogsController < ApplicationController
     end
 
     patch '/logs/:id' do
-        if !logged_in?
-            redirect '/'
-        else
-            check_completion(params)
-        end
+        user_check
+        check_completion(params)
         @user = current_user
         @log = Log.find_by(id: params[:id])
         @log.update(
@@ -106,9 +95,7 @@ class LogsController < ApplicationController
     end
 
     get '/logs/:id/delete' do
-        if !logged_in?
-            redirect '/'
-        end
+        user_check
         @user = current_user
         @log = Log.find_by(id: params[:id])
         if @user.id == @log.user_id

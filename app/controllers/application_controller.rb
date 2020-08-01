@@ -23,6 +23,13 @@ class ApplicationController < Sinatra::Base
       !!session[:user_id]
     end
 
+    def user_check
+      if !logged_in?
+        flash[:notice] = "You must be logged in!"
+        redirect '/'
+      end
+    end
+
     def current_user
       User.find(session[:user_id])
     end
