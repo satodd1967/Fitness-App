@@ -93,12 +93,13 @@ li {
     color: #9b9b9b;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="email"] {
     display: block;
     margin: auto auto;
     width: 100%;
     margin-bottom: 1em;
     padding: .5em 0;
+    padding-left: 5px;
     border: none;
     border-bottom: 1.5px solid #eaeaea;
     padding-bottom: 1.25em;

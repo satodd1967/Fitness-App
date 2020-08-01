@@ -18,7 +18,7 @@
         <h2>Diary entries for <%= @logs.first.date %></h2>
         <% @logs.each do |log| %>
             <ul>
-                <h4><li><%= log.user.username %></li></h4>
+                <li><h4><%= log.user.username %><h4></li>
                 <li>Log Date: <%= log.date %></li>
                 <li>Worked Out: <%= binary_convert(log.worked_out) %></li>
                 <li>Tracked Food: <%= binary_convert(log.tracked_food) %></li>
