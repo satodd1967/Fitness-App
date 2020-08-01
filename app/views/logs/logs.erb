@@ -1,30 +1,35 @@
-<h1>Fitness App</h1>
-<h2>Public Diary Entries</h2>
-<br>
-<h4><a href="/users/<%= @user.slug %>"><button>My Diary</button></a></h4>
-<h4><a href="/logs/new"><button>New Log Entry</button></a></h4>
-<h4><a href="/logout"><button>Log Out</button></a></h4>
-<br>
-<form action="/logs" method="get">
-  Date: <input type="date" name="date">
-  <input type="submit" value="Change Date">
-</form>
-<br>
-<h2>Diary entries for <%= @logs.first.date %></h2>
-<br>
-<% @logs.each do |log| %>
-    <ul>
-        <h4><li><%= log.user.username %></li></h4>
-        <li>Log Date: <%= log.date %></li>
-        <li>Worked Out: <%= binary_convert(log.worked_out) %></li>
-        <li>Tracked Food: <%= binary_convert(log.tracked_food) %></li>
-        <li>Weight: <%= log.weight %></li>
-        <li>Body Fat: <%= (log.body_fat.to_f*100).round(2) %>%</li>
-        <li>Active Calories: <%= log.active_calories %></li>
-        <li>Calories: <%= log.calories %></li>
-        <% if current_user == User.find(log.user.id) %>
-            <li><a href="/logs/<%= log.id %>"><button>View/Edit Log</button></a></li>
-        <% end %>
-        <br>
-    </ul>
-    <% end %>
+<div class="sidebar">
+    <div class="logo-text">
+        <h1>Fitness App</h1>
+        <h3>Public Diary Entries</h3>
+    </div>
+        <h4><a href="/users/<%= @user.slug %>">My Diary</a></h4>
+        <h4><a href="/logs/new">New Log Entry</a></h4>
+        <h4><a href="/logout">Log Out</a></h4>
+</div>
+<div class="content">
+    <div class="changedate">
+        <form>
+            <form action="/logs" method="get">
+            <input type="date" name="date">
+            <input type="submit" value="Change Date">
+        </form>
+    </div>
+        <h2>Diary entries for <%= @logs.first.date %></h2>
+        <% @logs.each do |log| %>
+            <ul>
+                <h4><li><%= log.user.username %></li></h4>
+                <li>Log Date: <%= log.date %></li>
+                <li>Worked Out: <%= binary_convert(log.worked_out) %></li>
+                <li>Tracked Food: <%= binary_convert(log.tracked_food) %></li>
+                <li>Weight: <%= log.weight %></li>
+                <li>Body Fat: <%= (log.body_fat.to_f*100).round(2) %>%</li>
+                <li>Active Calories: <%= log.active_calories %></li>
+                <li>Calories: <%= log.calories %></li>
+                <% if current_user == User.find(log.user.id) %>
+                    <li><a href="/logs/<%= log.id %>"><button>View/Edit Log</button></a></li>
+                <% end %>
+                <br>
+            </ul>
+            <% end %>
+<div>
