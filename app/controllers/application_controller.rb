@@ -10,6 +10,9 @@ class ApplicationController < Sinatra::Base
     register Sinatra::Flash
   end 
 
+  # Checks to see if the user has an open session and is logged in.
+  # If they are it routes then directly to the logs page, if not it takes them to the signup/login page.
+
   get "/" do
     if logged_in?
       redirect '/logs'
@@ -18,10 +21,18 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  # Helper Methods 
+  
   helpers do
+
+    # Checks to see if a user is logged in or not.
+
     def logged_in?
       !!session[:user_id]
     end
+
+    # This method is for security in case someone tries to hit a route that navigation should not take them to.
+    # If they aren't logged in it routes them back to the login page.
 
     def user_check
       if !logged_in?
@@ -30,21 +41,27 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    # This method identifies the current user via the session.
+
     def current_user
       User.find(session[:user_id])
     end
 
-    
+    # This method checks to see if a password meets the complexity and validation requirements.
 
     def pass_valid(password)
       reg = /^(?=.*\d)(?=.*([a-z]|[A-Z]))([\x20-\x7E]){8,40}$/
       return (reg.match(password))? true : false
     end
 
+    # This method checks to see if the email address passes the validation requirements.
+
     def email_valid(email)
       reg = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
       return (reg.match(email))? true : false
     end
+
+    # This method checks to ensure that all required fields are filled in upon a form submission.
 
     def check_completion(params)
       params.each do |key, value|
@@ -55,6 +72,8 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    # This method converts radio button responses to binary 1's and zero's for the database.
+
     def binary_convert(string)
       if string.to_i == 0
         "No"
@@ -63,6 +82,8 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    # This method converts binary 1's and zero's back into strings for the views.
+
     def string_convert(string)
       if string.downcase == "yes"
         1
@@ -70,6 +91,8 @@ class ApplicationController < Sinatra::Base
         0
       end
     end
+
+    # This method performs all of the validation for the user signup form.
 
     def signup_valid(params)
       if User.find_by(username: params[:username])
