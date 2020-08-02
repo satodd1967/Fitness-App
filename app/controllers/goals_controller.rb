@@ -1,5 +1,5 @@
 class GoalsController < ApplicationController
-
+    
     get '/goals' do
         user_check
         @user = current_user
