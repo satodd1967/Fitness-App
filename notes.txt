@@ -3,13 +3,13 @@ User Stories
 Site opens to index(login) screen
     User can login
     User can click a link to sign up
-    User can click a link to view app information
 
 Login
     login requires a username and password
         if the username and password cannot be validated then users are given a message saying that thier login
             credentials are not valid and that they can either try again or sign up.  The login page then reloads
     Users are taken to the logs page
+        if the user already has a session logged in they will immediately be taken to the logs streen.
     If the user attempting to login does not have valid goals set they will be taken to the goals page upon submission
 Sign Up
     User clicks sign up from the index page
@@ -17,15 +17,16 @@ Sign Up
         Username
         Email
         Password
-        Start Weight
-        Start BodyFat
             All fields have appropriate validation requirements
             If fields don't meet validatin then a message flashes upon submit and reloads the signup page
                 If the username is already in use it is not valid
         From a successful signup a user goes to an add goals page
-    Users can click on a link to take them back to the login page in case they went to the signup page by mistake
+    If a user gets to the signup page and is loggedin they will reroute to the logs page.
+    If a user tries to signup with a username or email address that is already in use they will be told and re routed to the login page.
 
-Goals Page            
+Goals Page
+    User adds start weight
+    User adds start body fat            
     User adds a weight goal
     User adds a bodyfat goal
     User adds a start calorie goal
@@ -33,25 +34,56 @@ Goals Page
         If fields don't meet the validation then a message flashes upon submit and the goals page reloads
             with the same user logged in
     When the user submits thier goals they are taken to the logs page
+    user can logout from this page
+        If the user logs out or thier session is interupted from this page then they will be prompted to set goals the next time they login
 
 Logs page
     Logs page is the main screen for the app
-    The logs page defaults to the current date
+    The logs page defaults to the date of the last log entry
     The logs page allows a user to change the date
-    The logs page will show the user log for the date selected as well as the logs for all of thier friends for that date
+    The logs page will show the user log for the date selected as well as the logs for all of users for that date
     From the logs page the user can
-        Click on an edit link for thier own logs
-            Users cannot click on edit links for friends logs
-            the edit link takes them to the edit page for that specific log
+        Click on an view/edit link for thier own logs
+            Users cannot click on view/edit links for friends logs
+            the view/edit link takes them to the show page for that specific log
         Click on a link to add a log
             This will take them to a log new page
         Click on a link to a profile page
-            This will take them to a user show page that will show all of thier logs
-        Click on a link to edit thier goals
-            this takes them to the edit page for goals
-        click on a link to add a friends
-            this takes them to the add friend page
+            This will take them to a user show page that will show all of thier logs and thier current goals
         click on a link to logout
+        logout
+
+Profile page
+    The profile page will show the current goals and start information for the user as well as all of thier logs sorted in order from newest to oldest
+    From this page the user can
+        go back to the main logs page
+        edit thier goals
+        click on any of the view/edit links for thier logs
+            this will take them to a view page for that log
+        create a new log
+        logout
+
+Log Show page
+    From this page the user can edit a log
+        This will take them to that logs edit routed
+    The user can delete the log
+        This will delete the log and take the user back to thier profile page
+    The user can go back to thier profile page
+    User can go back to the logs page
+    the user can logout
+
+Logs edit page
+    From this page the user can navigate per the previous page or can edit the log and submit changes
+        upon submission they will be taken back to that logs show page with a success message.
+        All validation applies
+
+Logs new page
+    From this page the user can navigate per the previous page or can enter informatin and submit a new log
+        upon submission they will ba taken to the logs page with the date set to the date of the log they just created
+        All validation applies
+
+Edit goals page
+    Works in a similar manner to the logs pages
 
 
 
