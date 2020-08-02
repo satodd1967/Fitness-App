@@ -10,8 +10,8 @@
 <div class="log">
     <form action="/goals" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch">
-        Start Weight: <input type="number" name="start_weight" value="<%= @user.start_weight %>" step="0.01" min="0" max="300">
-        Start % Body Fat: <input type="number" name="start_bodyfat" value="<%= (@user.start_bodyfat.to_f*100).round(2) %>" step="0.01" min="0" max="50">
+        Start Weight: <input type="number" name="start_weight" value="<%= @goals.start_weight %>" step="0.01" min="0" max="300">
+        Start % Body Fat: <input type="number" name="start_bodyfat" value="<%= (@goals.start_bodyfat.to_f*100).round(2) %>" step="0.01" min="0" max="50">
         Weight Goal: <input type="number" name="weight_goal" value="<%= @goals.weight_goal %>">
         % Body Fat Goal: <input type="number" name="body_fat_goal" value="<%= (@goals.body_fat_goal.to_f*100).round(2) %>" step="0.01" min="0" max="50">
         Start Calorie Goal: <input type="number" name="start_calorie_goal" value="<%= @goals.start_calorie_goal %>">

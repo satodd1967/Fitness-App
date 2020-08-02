@@ -14,6 +14,8 @@
 ActiveRecord::Schema.define(version: 20200722175019) do
 
   create_table "goals", force: :cascade do |t|
+    t.float   "start_weight"
+    t.float   "start_bodyfat"
     t.float   "weight_goal"
     t.float   "body_fat_goal"
     t.integer "start_calorie_goal"
@@ -35,8 +37,6 @@ ActiveRecord::Schema.define(version: 20200722175019) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
-    t.float  "start_weight"
-    t.float  "start_bodyfat"
   end
 
 end
