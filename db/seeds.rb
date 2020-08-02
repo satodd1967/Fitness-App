@@ -16,4 +16,9 @@ Log.create(worked_out: "1", tracked_food: "1", weight: "140", body_fat: ".2482",
 Log.create(worked_out: "0", tracked_food: "1", weight: "135", body_fat: ".2335", active_calories: "0", calories: "3100", date: "2020-07-02", user: ab)
 Log.create(worked_out: "1", tracked_food: "0", weight: "136", body_fat: ".2245", active_calories: "320", calories: "2700", date: "2020-07-03", user: ab)
 
+joe = User.create(username: "JoeSmith", email: "Ab@outlook.com", password: "joe1", start_weight: "145", start_bodyfat: ".2433")
+Goal.create(weight_goal: "140", body_fat_goal: ".21", start_calorie_goal: "2800", user: tim)
+Log.create(worked_out: "1", tracked_food: "1", weight: "140", body_fat: ".2482", active_calories: "428", calories: "2900", date: "2020-07-01", user: ab)
+Log.create(worked_out: "0", tracked_food: "1", weight: "135", body_fat: ".2335", active_calories: "0", calories: "3100", date: "2020-07-02", user: ab)
+Log.create(worked_out: "1", tracked_food: "0", weight: "136", body_fat: ".2245", active_calories: "320", calories: "2700", date: "2020-07-03", user: ab)
 

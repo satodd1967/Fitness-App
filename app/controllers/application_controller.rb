@@ -71,6 +71,25 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def signup_valid(params)
+      if User.find_by(username: params[:username])
+        flash[:notice] = "#{params[:username]} is not available."
+        redirect '/signup'
+      elsif params[:username].include?(" ") || params[:username] == ""
+        flash[:notice] = "Usernames cannot include spaces or be blank."
+        redirect '/signup'
+      elsif User.find_by(email: params[:email])
+        flash[:notice] = "#{params[:email]} has already signed up please login."
+        redirect '/'
+      elsif !email_valid(params[:email])
+        flash[:notice] = "#{params[:email]} is an invalid email address.  Please enter a valid email address."
+        redirect '/signup'
+      elsif !pass_valid(params[:password])
+        flash[:notice] = "Password does not meet complexity requirements."
+        redirect '/signup'
+      end
+    end
+
   end
   
 end

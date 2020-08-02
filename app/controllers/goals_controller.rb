@@ -9,7 +9,7 @@ class GoalsController < ApplicationController
 
     post '/goals' do
         user_check
-        check_completion
+        check_completion(params)
         @user = current_user
         @goals = Goal.create(
             weight_goal: params[:weight_goal],
