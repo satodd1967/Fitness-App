@@ -3,7 +3,7 @@ class LogsController < ApplicationController
     get '/logs' do
         user_check
         @user = current_user
-        if @logs = Log.where(date: params[:date]) != []
+        if Log.where(date: params[:date]) != []
             @logs = Log.where(date: params[:date])
             erb :'/logs/logs'
         elsif params != {}
@@ -33,20 +33,13 @@ class LogsController < ApplicationController
         @user = current_user
         if @user.logs.find_by(date: params[:date])
             flash[:notice] = "You have already logged for #{params[:date]}."
-            flash[:navigation] = "Change the date and try again or edit/delete the original log."
+            flash[:navigation] = "Change the date and try again or edit/delete the original entry."
             flash[:date_param] = "#{params[:date]}"
             redirect '/logs/new'
         else
-            Log.create(
-                worked_out: string_convert(params[:worked_out]),
-                tracked_food: string_convert(params[:tracked_food]),
-                weight: params[:weight],
-                body_fat: "#{params[:body_fat].to_f/100}",
-                active_calories: params[:active_calories],
-                calories: params[:calories],
-                date: params[:date],
-                user_id: @user.id
-            )
+            params[:body_fat] = params[:body_fat].to_f/100
+            params[:user_id] = @user.id
+            Log.create(params)
             flash[:notice] = "You have successfully added a diary entry."
             flash[:date] = "#{params[:date]}"
         end
@@ -80,18 +73,22 @@ class LogsController < ApplicationController
         check_completion(params)
         @user = current_user
         @log = Log.find_by(id: params[:id])
-        @log.update(
-            worked_out: string_convert(params[:worked_out]),
-            tracked_food: string_convert(params[:tracked_food]),
-            weight: params[:weight],
-            body_fat: "#{params[:body_fat].to_f/100}",
-            active_calories: params[:active_calories],
-            calories: params[:calories],
-            user_id: @user.id
-            )
-        @log.save
-        flash[:notice] = "You have succesfully upated this diary entry"
-        redirect "/logs/#{@log.id}"
+        if @user.id == @log.user_id
+            @log.update(
+                worked_out: string_convert(params[:worked_out]),
+                tracked_food: string_convert(params[:tracked_food]),
+                weight: params[:weight],
+                body_fat: "#{params[:body_fat].to_f/100}",
+                active_calories: params[:active_calories],
+                calories: params[:calories],
+                user_id: @user.id
+                )
+            flash[:notice] = "You have succesfully upated this diary entry"
+            redirect "/logs/#{@log.id}"
+        else
+            flash[:notice] = "You can only edit diary entries that belong to you"
+            redirect '/logs'
+        end
     end
 
     get '/logs/:id/delete' do

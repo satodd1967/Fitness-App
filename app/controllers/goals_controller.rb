@@ -9,19 +9,14 @@ class GoalsController < ApplicationController
 
     post '/goals' do
         user_check
+        check_completion
         @user = current_user
-        params.each do |key, value|
-            if value == ""
-                flash[:notice] = "Please enter all goals"
-                redirect '/goals/new'
-            end
-        end
         @goals = Goal.create(
             weight_goal: params[:weight_goal],
-             body_fat_goal: "#{params[:body_fat_goal].to_f/100}",
-              start_calorie_goal: params[:start_calorie_goal],
-               user_id: @user.id
-               )
+            body_fat_goal: "#{params[:body_fat_goal].to_f/100}",
+            start_calorie_goal: params[:start_calorie_goal],
+            user_id: @user.id
+            )
         @user.start_weight = params[:start_weight]
         @user.start_bodyfat = "#{params[:start_bodyfat].to_f/100}"
         @user.save
