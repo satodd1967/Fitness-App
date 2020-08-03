@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
     has_secure_password
     has_many :logs
+    has_many :userpoints, through: :logs
     has_one :goal
 
     def slug
