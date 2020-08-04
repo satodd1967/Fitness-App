@@ -8,6 +8,13 @@ class Logs < ActiveRecord::Migration
       t.integer :active_calories
       t.integer :calories
       t.integer :user_id
+      t.integer :points_worked_out
+      t.integer :points_tracked_food
+      t.integer :points_met_calorie_goal
+      t.integer :points_maintain_weight
+      t.integer :points_maintain_bodyfat
+      t.integer :points_met_active_calories
+      t.integer :total_points
     end
   end
 end
