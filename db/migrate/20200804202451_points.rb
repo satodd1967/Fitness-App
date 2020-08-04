@@ -1,6 +1,6 @@
 class Points < ActiveRecord::Migration
   def change
-    create_table :logs do |t|
+    create_table :points do |t|
       t.integer :points_worked_out
       t.integer :points_tracked_food
       t.integer :points_met_calorie_goal

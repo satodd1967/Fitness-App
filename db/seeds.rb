@@ -27,3 +27,42 @@ Goal.create(weight_goal: "140", body_fat_goal: ".21", start_calorie_goal: "2800"
 Log.create(worked_out: "1", tracked_food: "1", weight: "140", body_fat: ".2482", active_calories: "428", calories: "2900", date: "2020-07-01", user: angie)
 Log.create(worked_out: "0", tracked_food: "1", weight: "135", body_fat: ".2335", active_calories: "0", calories: "3100", date: "2020-07-02", user: angie)
 Log.create(worked_out: "1", tracked_food: "0", weight: "136", body_fat: ".2245", active_calories: "320", calories: "2700", date: "2020-07-03", user: angie)
+
+
+Point.create(points_worked_out: 10, points_tracked_food: 10, points_met_calorie_goal: 10, points_maintain_weight: 5, points_maintain_bodyfat: 5, points_met_active_calories: 10)
+
+User.all.each do |user|
+    user.logs.each do |log|
+        log.points_worked_out = log.worked_out * Point.last.points_worked_out
+        log.points_tracked_food = log.tracked_food * Point.last.points_tracked_food
+        if user.goal.start_calorie_goal - log.calories >= 0
+            log.points_met_calorie_goal = Point.last.points_met_calorie_goal
+        else
+            log.points_met_calorie_goal = 0
+        end
+        if log.weight <= user.goal.start_weight
+            log.points_maintain_weight = Point.last.points_maintain_weight
+        else
+            log.points_maintain_weight = 0
+        end
+        if log.body_fat <= user.goal.start_bodyfat
+            log.points_maintain_bodyfat = Point.last.points_maintain_bodyfat
+        else
+            log.points_maintain_bodyfat = 0
+        end
+        if log.active_calories <= 400
+            log.points_met_active_calories = Point.last.points_met_active_calories
+        else
+            log.points_met_active_calories = 0
+        end
+        log.total_points = [
+            log.points_worked_out,
+             log.points_tracked_food,
+              log.points_met_calorie_goal,
+               log.points_maintain_weight,
+                log.points_maintain_bodyfat,
+                 log.points_met_active_calories
+                ].sum
+        log.save
+    end
+end
