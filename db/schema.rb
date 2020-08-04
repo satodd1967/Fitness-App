@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200722175019) do
+ActiveRecord::Schema.define(version: 20200803212701) do
 
   create_table "goals", force: :cascade do |t|
     t.float   "start_weight"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 20200722175019) do
     t.float   "body_fat_goal"
     t.integer "start_calorie_goal"
     t.integer "user_id"
+  end
+
+  create_table "log_userpoints", force: :cascade do |t|
+    t.integer "log_id"
+    t.integer "userpoint_id"
   end
 
   create_table "logs", force: :cascade do |t|
@@ -31,6 +36,24 @@ ActiveRecord::Schema.define(version: 20200722175019) do
     t.integer "calories"
     t.integer "user_id"
     t.string  "date"
+  end
+
+  create_table "points", force: :cascade do |t|
+    t.integer "worked_out"
+    t.integer "tracked_food"
+    t.integer "met_calorie_goal"
+    t.integer "maintain_weight"
+    t.integer "maintain_bodyfat"
+    t.integer "met_active_calories"
+  end
+
+  create_table "userpoints", force: :cascade do |t|
+    t.integer "worked_out"
+    t.integer "tracked_food"
+    t.integer "met_calorie_goal"
+    t.integer "maintain_weight"
+    t.integer "maintain_bodyfat"
+    t.integer "met_active_calories"
   end
 
   create_table "users", force: :cascade do |t|
