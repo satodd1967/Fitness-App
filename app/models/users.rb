@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
     has_secure_password
     has_many :logs
     has_one :goal
@@ -12,5 +13,5 @@ class User < ActiveRecord::Base
             obj.slug == slug
         end
       end
-      
+            
 end
