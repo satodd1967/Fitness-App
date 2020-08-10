@@ -7,6 +7,8 @@ class Log < ActiveRecord::Base
         Log.create(params)
     end
 
+   # This method converts binary 1's and zero's back into strings for the views.
+    
     def self.string_convert(string)
         if string.downcase == "yes"
           1
