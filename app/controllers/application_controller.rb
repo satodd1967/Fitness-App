@@ -84,13 +84,13 @@ class ApplicationController < Sinatra::Base
 
     # This method converts binary 1's and zero's back into strings for the views.
 
-    def string_convert(string)
-      if string.downcase == "yes"
-        1
-      else
-        0
-      end
-    end
+    # def string_convert(string)
+    #   if string.downcase == "yes"
+    #     1
+    #   else
+    #     0
+    #   end
+    # end
 
     # This method performs all of the validation for the user signup form.
 

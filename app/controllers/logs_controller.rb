@@ -52,11 +52,7 @@ class LogsController < ApplicationController
             flash[:date_param] = "#{params[:date]}"
             redirect '/logs/new'
         else
-            # params[:body_fat] = params[:body_fat].to_f/100
-            # params[:user_id] = @user.id
-            # Log.create(params)
-            @new_log = Log.convert_create(params, @user)
-            binding.pry
+            Log.convert_create(params, @user)
             flash[:notice] = "You have successfully added a diary entry."
             flash[:date] = "#{params[:date]}"
         end
@@ -105,15 +101,16 @@ class LogsController < ApplicationController
         @user = current_user
         @log = Log.find_by(id: params[:id])
         if @user.id == @log.user_id
-            @log.update(
-                worked_out: string_convert(params[:worked_out]),
-                tracked_food: string_convert(params[:tracked_food]),
-                weight: params[:weight],
-                body_fat: "#{params[:body_fat].to_f/100}",
-                active_calories: params[:active_calories],
-                calories: params[:calories],
-                user_id: @user.id
-                )
+            # @log.update(
+            #     worked_out: string_convert(params[:worked_out]),
+            #     tracked_food: string_convert(params[:tracked_food]),
+            #     weight: params[:weight],
+            #     body_fat: "#{params[:body_fat].to_f/100}",
+            #     active_calories: params[:active_calories],
+            #     calories: params[:calories],
+            #     user_id: @user.id
+            #     )
+            Log.log_update(params, @user, @log)
             flash[:notice] = "You have succesfully upated this diary entry"
             redirect "/logs/#{@log.id}"
         else
