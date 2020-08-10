@@ -52,9 +52,11 @@ class LogsController < ApplicationController
             flash[:date_param] = "#{params[:date]}"
             redirect '/logs/new'
         else
-            params[:body_fat] = params[:body_fat].to_f/100
-            params[:user_id] = @user.id
-            Log.create(params)
+            # params[:body_fat] = params[:body_fat].to_f/100
+            # params[:user_id] = @user.id
+            # Log.create(params)
+            @new_log = Log.convert_create(params, @user)
+            binding.pry
             flash[:notice] = "You have successfully added a diary entry."
             flash[:date] = "#{params[:date]}"
         end
