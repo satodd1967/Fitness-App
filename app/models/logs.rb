@@ -19,6 +19,9 @@ class Log < ActiveRecord::Base
         end
       end
 
+    # This method converts some params from strings to binaries and converts
+    # bodyfat to a decimal point for the datebase and then updates the record.
+
     def self.log_update(params, user, log)
         log.update(
         worked_out: string_convert(params[:worked_out]),
