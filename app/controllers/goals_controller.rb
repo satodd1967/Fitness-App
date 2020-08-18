@@ -18,10 +18,11 @@ class GoalsController < ApplicationController
         user_check
         check_completion(params)
         @user = current_user
-        params[:start_bodyfat] = params[:start_bodyfat].to_f/100
-        params[:body_fat_goal] = params[:body_fat_goal].to_f/100
-        params[:user_id] = @user.id
-        @goals = Goal.create(params)
+        Goal.convert_create(params, @user)
+        # params[:start_bodyfat] = params[:start_bodyfat].to_f/100
+        # params[:body_fat_goal] = params[:body_fat_goal].to_f/100
+        # params[:user_id] = @user.id
+        # @goals = Goal.create(params)
         flash[:notice] = "You have successfully created your goals"
         flash[:navigation] = "Review and edit your goals, view your diary, or continue on to view all user diaries"
         redirect '/goals'

@@ -1,6 +1,8 @@
 class Log < ActiveRecord::Base
     belongs_to :user
 
+    # This method converts bodyfat from a percentage to a float and then creates the log
+
     def self.convert_create(params, user)
         params[:body_fat] = params[:body_fat].to_f/100
         params[:user_id] = user.id
