@@ -6,7 +6,8 @@ class Log < ActiveRecord::Base
     def self.convert_create(params, user)
         params[:body_fat] = params[:body_fat].to_f/100
         params[:user_id] = user.id
-        Log.create(params)
+        pointless_log = Log.create(params)
+        pointed_log(pointless_log, user)
     end
 
    # This method converts binary 1's and zero's back into strings for the views.
@@ -32,7 +33,42 @@ class Log < ActiveRecord::Base
         calories: params[:calories],
         user_id: user.id
         )
+        pointed_log(log, user)
     end
+
+    def self.pointed_log(log, user)
+      log.points_worked_out = log.worked_out * Point.last.points_worked_out
+      log.points_tracked_food = log.tracked_food * Point.last.points_tracked_food
+      if user.goal.start_calorie_goal - log.calories >= 0
+          log.points_met_calorie_goal = Point.last.points_met_calorie_goal
+      else
+          log.points_met_calorie_goal = 0
+      end
+      if log.weight <= user.goal.start_weight
+          log.points_maintain_weight = Point.last.points_maintain_weight
+      else
+          log.points_maintain_weight = 0
+      end
+      if log.body_fat <= user.goal.start_bodyfat
+          log.points_maintain_bodyfat = Point.last.points_maintain_bodyfat
+      else
+          log.points_maintain_bodyfat = 0
+      end
+      if log.active_calories <= 400
+          log.points_met_active_calories = Point.last.points_met_active_calories
+      else
+          log.points_met_active_calories = 0
+      end
+      log.total_points = [
+          log.points_worked_out,
+           log.points_tracked_food,
+            log.points_met_calorie_goal,
+             log.points_maintain_weight,
+              log.points_maintain_bodyfat,
+               log.points_met_active_calories
+              ].sum
+      log.save
+  end
 
 
 end
