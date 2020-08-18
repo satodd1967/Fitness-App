@@ -2,6 +2,7 @@ class Log < ActiveRecord::Base
     belongs_to :user
 
     # This method converts bodyfat from a percentage to a float and then creates the log
+    # This method also adds points to the log being created.
 
     def self.convert_create(params, user)
         params[:body_fat] = params[:body_fat].to_f/100
@@ -22,6 +23,7 @@ class Log < ActiveRecord::Base
 
     # This method converts some params from strings to binaries and converts
     # bodyfat to a decimal point for the datebase and then updates the record.
+    # This method also updates the points for the log being updated.
 
     def self.log_update(params, user, log)
         log.update(
@@ -35,6 +37,8 @@ class Log < ActiveRecord::Base
         )
         pointed_log(log, user)
     end
+
+    # This method addes points to a log or updates points for a log.
 
     def self.pointed_log(log, user)
       log.points_worked_out = log.worked_out * Point.last.points_worked_out
