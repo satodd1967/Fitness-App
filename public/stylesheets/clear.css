@@ -36,6 +36,14 @@ h4 {
     line-height: 22px;
     font-weight: 600;
   }
+
+h5 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+  }
   
 a {
     color: #828586;

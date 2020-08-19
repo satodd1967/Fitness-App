@@ -26,8 +26,9 @@
                 <li>Body Fat: <%= (log.body_fat.to_f*100).round(2) %>%</li>
                 <li>Active Calories: <%= log.active_calories %></li>
                 <li>Calories: <%= log.calories %></li>
+                <li>Total Points: <%= log.total_points %></li>
                 <% if current_user == User.find(log.user.id) %>
-                    <li><a href="/logs/<%= log.id %>"><button>View/Edit Log</button></a></li>
+                    <a href="/logs/<%= log.id %>"><button>View/Edit Log</button></a>
                 <% end %>
                 <br>
             </ul>
