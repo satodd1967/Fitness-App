@@ -13,12 +13,12 @@
     <h4>Starting Information</h4>
     <ul>
         <li>Start Weight: <%= @goals.start_weight %></li>
-        <li>Start Body Fat: <%= @goals.start_bodyfat.round(2)*100 %>%</li>
+        <li>Start Body Fat: <%= (@goals.start_bodyfat*100).round(2) %>%</li>
     </ul>
     <h4>Current Goals</h4>
     <ul>
         <li>Weight Goal: <%= @goals.weight_goal %></li>
-        <li>Body Fat Goal: <%= @goals.body_fat_goal.round(2)*100 %>%</li>
+        <li>Body Fat Goal: <%= (@goals.start_bodyfat*100).round(2) %>%</li>
         <li>Start Calorie Goal: <%= @goals.start_calorie_goal %></li>
     </ul>
     <hr style="width: 30%; margin-left: 0%;">
